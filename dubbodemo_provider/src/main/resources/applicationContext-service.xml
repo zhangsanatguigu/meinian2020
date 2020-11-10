@@ -5,6 +5,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
          http://www.springframework.org/schema/mvc
@@ -12,7 +13,9 @@
          http://code.alibabatech.com/schema/dubbo
          http://code.alibabatech.com/schema/dubbo/dubbo.xsd
          http://www.springframework.org/schema/context
-         http://www.springframework.org/schema/context/spring-context.xsd">
+         http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/tx
+         http://www.springframework.org/schema/tx/spring-tx.xsd">
     <!-- 应用名称，用于注册中心对微服务的管理 -->
     <dubbo:application name="dubbodemo_provider"></dubbo:application>
 
@@ -23,6 +26,24 @@
     <dubbo:protocol name="dubbo" port="20883"></dubbo:protocol>
 
     <!-- dubbo框架扫描包 -->
-    <dubbo:annotation package="com.atguigu.service.impl"></dubbo:annotation>
+    <dubbo:annotation package="com.atguigu.service"></dubbo:annotation>
+
+    <!--数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://192.168.137.123:3306/test"/>
+    </bean>
+    <!-- 事务管理器  -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--开启事务控制的注解支持-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
 
 </beans>
