@@ -8,4 +8,13 @@
         values
         (#{code},#{name},#{sex},#{age},#{price},#{type},#{remark},#{attention})
     </insert>
+
+    <select id="findPage" parameterType="string" resultType="travelItem">
+        select * from t_travelitem
+        <where>
+            <if test="value!=null and value.length>0">
+                name like "%"#{value}"%" or code=#{value}
+            </if>
+        </where>
+    </select>
 </mapper>
