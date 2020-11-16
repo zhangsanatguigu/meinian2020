@@ -16,6 +16,20 @@ public class TravelItemController {
     @Reference
     TravelItemService travelItemService;
 
+    @RequestMapping("/delete")
+    public Result delete(Integer id){
+        try {
+            travelItemService.deleteById(id);
+            return new Result(true,MessageConstant.DELETE_TRAVELITEM_SUCCESS);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return new Result(false, e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.DELETE_TRAVELITEM_FAIL);
+        }
+    }
+
     @PostMapping("/findPage")
     public PageResult get(@RequestBody QueryPageBean queryPageBean){
         PageResult pageResult = travelItemService.findPage(
@@ -24,7 +38,6 @@ public class TravelItemController {
                 queryPageBean.getQueryString());
         return pageResult;
     }
-
 
     @PostMapping("/add")
     public Result add(@RequestBody TravelItem travelItem){
@@ -37,5 +50,7 @@ public class TravelItemController {
         }
         return new Result(true, MessageConstant.ADD_TRAVELITEM_SUCCESS);
     }
+
+
 
 }

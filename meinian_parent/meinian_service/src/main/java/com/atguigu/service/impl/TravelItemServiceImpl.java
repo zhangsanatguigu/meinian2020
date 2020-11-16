@@ -28,4 +28,13 @@ public class TravelItemServiceImpl implements TravelItemService {
         Page<TravelItem> page = travelItemDao.findPage(queryString);
         return new PageResult(page.getTotal(),page.getResult());
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        long count = travelItemDao.findCountByTravelItemItemId(id);
+        if(count>0){
+            throw new RuntimeException("不允许删除");
+        }
+        travelItemDao.deleteById(id);
+    }
 }

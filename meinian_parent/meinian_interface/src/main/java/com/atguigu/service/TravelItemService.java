@@ -7,4 +7,6 @@ public interface TravelItemService {
     void add(TravelItem travelItem);
 
     PageResult findPage(Integer currentPage, Integer pageSize, String queryString);
+
+    void deleteById(Integer id);
 }

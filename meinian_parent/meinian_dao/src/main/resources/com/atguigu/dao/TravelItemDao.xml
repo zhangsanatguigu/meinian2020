@@ -17,4 +17,12 @@
             </if>
         </where>
     </select>
+
+    <delete id="deleteById" parameterType="integer">
+        delete from t_travelitem where id=#{id}
+    </delete>
+    
+    <select id="findCountByTravelItemItemId" parameterType="integer" resultType="long">
+        select count(*) from t_travelgroup_travelitem where travelitem_id = #{id}
+    </select>
 </mapper>
