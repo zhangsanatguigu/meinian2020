@@ -13,4 +13,6 @@ public interface TravelGroupService {
     TravelGroup findById(Integer id);
 
     List<Integer> findTravelItemIdByTravelgroupId(Integer id);
+
+    void edit(TravelGroup travelGroup, Integer[] travelItemIds);
 }

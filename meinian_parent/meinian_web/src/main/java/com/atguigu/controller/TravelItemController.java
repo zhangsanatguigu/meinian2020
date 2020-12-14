@@ -5,6 +5,7 @@ import com.atguigu.constant.MessageConstant;
 import com.atguigu.entity.PageResult;
 import com.atguigu.entity.QueryPageBean;
 import com.atguigu.entity.Result;
+import com.atguigu.pojo.TravelGroup;
 import com.atguigu.pojo.TravelItem;
 import com.atguigu.service.TravelItemService;
 import org.springframework.web.bind.annotation.*;
@@ -75,4 +76,6 @@ public class TravelItemController {
         List<TravelItem> list = travelItemService.findAll();
         return new Result(true,MessageConstant.QUERY_TRAVELITEM_SUCCESS,list);
     }
+
+
 }

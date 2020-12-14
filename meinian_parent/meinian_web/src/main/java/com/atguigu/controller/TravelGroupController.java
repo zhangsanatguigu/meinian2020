@@ -44,4 +44,10 @@ public class TravelGroupController {
         List<Integer> list = travelGroupService.findTravelItemIdByTravelgroupId(id);
         return list ;
     }
+
+    @RequestMapping("/edit")
+    public Result edit(@RequestBody TravelGroup travelGroup,Integer[] travelItemIds){
+        travelGroupService.edit(travelGroup,travelItemIds);
+        return new Result(true,MessageConstant.EDIT_TRAVELGROUP_SUCCESS);
+    }
 }

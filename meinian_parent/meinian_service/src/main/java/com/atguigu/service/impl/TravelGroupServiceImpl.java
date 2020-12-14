@@ -58,4 +58,11 @@ public class TravelGroupServiceImpl implements TravelGroupService {
     public List<Integer> findTravelItemIdByTravelgroupId(Integer id) {
         return travelGroupDao.findTravelItemIdByTravelgroupId(id);
     }
+
+    @Override
+    public void edit(TravelGroup travelGroup, Integer[] travelItemIds) {
+        travelGroupDao.edit(travelGroup);
+        travelGroupDao.deleteTravelGroupAndTravelItemByTravelGroupId(travelGroup.getId());
+        setTravelGroupAndTravelItem(travelGroup.getId(),travelItemIds);
+    }
 }

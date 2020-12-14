@@ -30,5 +30,34 @@
     <select id="findTravelItemIdByTravelgroupId" parameterType="integer" resultType="integer">
         select travelitem_id from t_travelgroup_travelitem where travelgroup_id=#{id}
     </select>
+
+    <delete id="deleteTravelGroupAndTravelItemByTravelGroupId" parameterType="integer">
+        delete from t_travelgroup_travelitem where travelgroup_id=#{id}
+    </delete>
+
+    <update id="edit" parameterType="travelGroup" >
+        update t_travelgroup
+        <set>
+            <if test="code!=null and code.length>0">
+                code = #{code},
+            </if>
+            <if test="name!=null and name.length>0">
+                name = #{name},
+            </if>
+            <if test="helpCode!=null and helpCode.length>0">
+                helpCode = #{helpCode},
+            </if>
+            <if test="sex!=null and sex.length>0">
+                sex = #{sex},
+            </if>
+            <if test="remark!=null and remark.length>0">
+                remark = #{remark},
+            </if>
+            <if test="attention!=null and attention.length>0">
+                attention = #{attention},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
 

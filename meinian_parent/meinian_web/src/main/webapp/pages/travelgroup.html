@@ -282,6 +282,16 @@
             methods: {
                 //编辑
                 handleEdit() {
+                    axios.post("/travelGroup/edit.do?travelItemIds="+this.travelItemIds,this.formData).then((resp)=>{
+                        this.dialogFormVisible4Edit = false;
+                        if (resp.data.flag){
+                            this.$message.success(resp.data.message);
+                        }else{
+                            this.$message.error(resp.data.message);
+                        }
+                    }).finally(()=>{
+                        this.findPage();
+                    });
                 },
                 //添加
                 handleAdd () {
