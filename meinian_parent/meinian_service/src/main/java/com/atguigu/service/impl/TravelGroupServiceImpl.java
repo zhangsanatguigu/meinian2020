@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Transactional
@@ -45,5 +46,16 @@ public class TravelGroupServiceImpl implements TravelGroupService {
         Page<TravelGroup> page = travelGroupDao.findPage(queryString);
 
         return new PageResult(page.getTotal(),page.getResult());
+    }
+
+    @Override
+    public TravelGroup findById(Integer id) {
+        TravelGroup travelGroup = travelGroupDao.findById(id);
+        return travelGroup;
+    }
+
+    @Override
+    public List<Integer> findTravelItemIdByTravelgroupId(Integer id) {
+        return travelGroupDao.findTravelItemIdByTravelgroupId(id);
     }
 }

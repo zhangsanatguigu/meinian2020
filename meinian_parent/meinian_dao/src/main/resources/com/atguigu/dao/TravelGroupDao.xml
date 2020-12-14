@@ -22,5 +22,13 @@
             </if>
         </where>
     </select>
+
+    <select id="findById" parameterType="integer" resultType="travelGroup">
+        select * from t_travelgroup where id = #{id}
+    </select>
+
+    <select id="findTravelItemIdByTravelgroupId" parameterType="integer" resultType="integer">
+        select travelitem_id from t_travelgroup_travelitem where travelgroup_id=#{id}
+    </select>
 </mapper>
 

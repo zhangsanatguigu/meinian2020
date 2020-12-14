@@ -331,6 +331,27 @@
                 },
                 // 弹出编辑窗口
                 handleUpdate(row) {
+                    axios.get("/travelGroup/findById.do?id="+row.id).then((resp)=>{
+                        if (resp.data.flag){
+                            this.dialogFormVisible4Edit = true;
+                            this.activeName = "first";
+                            this.formData = resp.data.data;
+                            this.$message.success(resp.data.message);
+
+                            axios.get("/travelItem/findAll.do").then((resp)=>{
+                                if (resp.data.flag){
+                                    this.tableData = resp.data.data;
+                                    axios.get("/travelGroup/findTravelItemIdByTravelgroupId.do?id="+row.id).then((resp)=>{
+                                        this.travelItemIds = resp.data;  //回显
+                                    });
+                                }else{
+                                    this.$message.error(resp.data.message);
+                                }
+                            });
+                        }else{
+                            this.$message.error(resp.data.message);
+                        }
+                    });
                 },
                 //切换页码
                 handleCurrentChange(currentPage) {

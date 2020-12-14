@@ -9,6 +9,8 @@ import com.atguigu.pojo.TravelGroup;
 import com.atguigu.service.TravelGroupService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/travelGroup")
 public class TravelGroupController {
@@ -29,5 +31,17 @@ public class TravelGroupController {
                 queryPageBean.getPageSize(),
                 queryPageBean.getQueryString());
         return pageResult;
+    }
+
+    @GetMapping("/findById")
+    public Result findById(Integer id){
+        TravelGroup travelGroup = travelGroupService.findById(id);
+        return new Result(true,MessageConstant.QUERY_TRAVELGROUP_SUCCESS,travelGroup);
+    }
+
+    @GetMapping("/findTravelItemIdByTravelgroupId")
+    public List<Integer> findTravelItemIdByTravelgroupId(Integer id){
+        List<Integer> list = travelGroupService.findTravelItemIdByTravelgroupId(id);
+        return list ;
     }
 }
