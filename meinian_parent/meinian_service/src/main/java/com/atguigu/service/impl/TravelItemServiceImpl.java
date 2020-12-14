@@ -10,6 +10,8 @@ import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service(interfaceClass = TravelItemService.class)
 @Transactional
 public class TravelItemServiceImpl implements TravelItemService {
@@ -46,5 +48,10 @@ public class TravelItemServiceImpl implements TravelItemService {
     @Override
     public void edit(TravelItem travelItem) {
         travelItemDao.edit(travelItem);
+    }
+
+    @Override
+    public List<TravelItem> findAll() {
+        return travelItemDao.findAll();
     }
 }

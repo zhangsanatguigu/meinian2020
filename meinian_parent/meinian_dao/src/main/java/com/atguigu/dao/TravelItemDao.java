@@ -2,6 +2,7 @@ package com.atguigu.dao;
 
 import com.atguigu.pojo.TravelItem;
 import com.github.pagehelper.Page;
+import java.util.List;
 
 public interface TravelItemDao {
     void add(TravelItem travelItem);
@@ -15,4 +16,6 @@ public interface TravelItemDao {
     TravelItem getById(Integer id);
 
     void edit(TravelItem travelItem);
+
+    List<TravelItem> findAll();
 }

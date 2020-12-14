@@ -60,5 +60,9 @@
         </set>
         where id = #{id}
     </update>
+    
+    <select id="findAll" resultType="travelitem">
+        select * from t_travelitem
+    </select>
 
 </mapper>

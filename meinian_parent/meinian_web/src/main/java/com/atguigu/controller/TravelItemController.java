@@ -9,6 +9,8 @@ import com.atguigu.pojo.TravelItem;
 import com.atguigu.service.TravelItemService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/travelItem")
 public class TravelItemController {
@@ -66,5 +68,11 @@ public class TravelItemController {
             return new Result(false,MessageConstant.EDIT_TRAVELITEM_FAIL);
         }
         return new Result(true,MessageConstant.EDIT_TRAVELITEM_SUCCESS);
+    }
+
+    @GetMapping("/findAll")
+    public Result findAll(){
+        List<TravelItem> list = travelItemService.findAll();
+        return new Result(true,MessageConstant.QUERY_TRAVELITEM_SUCCESS,list);
     }
 }
