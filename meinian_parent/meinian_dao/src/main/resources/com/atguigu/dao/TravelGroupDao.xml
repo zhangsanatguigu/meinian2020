@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.dao.TravelGroupDao">
+    <insert id="add" parameterType="travelGroup" useGeneratedKeys="true" keyProperty="id">
+        <!--<selectKey keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>-->
+        insert into t_travelgroup(code, name, helpCode, sex, remark, attention)
+        values(${code},${name},${helpCode},${sex},${remark},${attention})
+    </insert>
+    
+    <insert id="setTravelGroupAndTravelItem" parameterType="map">
+        insert into t_travelgroup_travelitem(travelgroup_id,travelitem_id) values(#{travelGroupId},#{travelItemId})
+    </insert>
+
+    <select id="findPage" parameterType="string" resultType="travelGroup">
+        select * from t_travelgroup
+        <where>
+            <if test="value!=null and value.length>0">
+                code = #{value} or name like "%"#{value}"%" or helpCode=#{value}
+            </if>
+        </where>
+    </select>
+</mapper>
+
