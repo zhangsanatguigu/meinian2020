@@ -11,4 +11,8 @@ public interface TravelItemDao {
     void deleteById(Integer id);
 
     long findCountByTravelItemItemId(Integer id);
+
+    TravelItem getById(Integer id);
+
+    void edit(TravelItem travelItem);
 }

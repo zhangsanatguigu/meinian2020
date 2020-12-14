@@ -37,4 +37,14 @@ public class TravelItemServiceImpl implements TravelItemService {
         }
         travelItemDao.deleteById(id);
     }
+
+    @Override
+    public TravelItem getById(Integer id) {
+        return travelItemDao.getById(id);
+    }
+
+    @Override
+    public void edit(TravelItem travelItem) {
+        travelItemDao.edit(travelItem);
+    }
 }

@@ -230,6 +230,23 @@
             methods: {
                 //编辑
                 handleEdit() {
+                    this.$refs['dataEditForm'].validate((valid) =>{
+                        if (valid){
+                            axios.post("/travelItem/edit.do",this.formData).then((resp) => {
+                                if (resp.data.flag){
+                                    this.dialogFormVisible4Edit = false;
+                                    this.$message.success(resp.data.message);
+                                }else{
+                                    this.$message.error(resp.data.message);
+                                }
+                            }).finally(()=>{
+                                this.findPage();
+                            });
+                        }else{
+                            this.$message.error("表单数据校验失败");
+                            return false ;
+                        }
+                    });
                 },
                 //分页查询
                 findPage() {
@@ -284,6 +301,14 @@
                 },
                 // 弹出编辑窗口
                 handleUpdate(row) {
+                    axios.get("/travelItem/findById.do?id="+row.id).then((resp)=>{
+                        if (resp.data.flag){
+                            this.dialogFormVisible4Edit = true;
+                            this.formData = resp.data.data;
+                        }else{
+                            this.$message.error(resp.data.message);
+                        }
+                    });
                 },
                 //切换页码
                 handleCurrentChange(currentPage) {
@@ -292,7 +317,6 @@
                 },
                 // 删除
                 handleDelete(row) {
-                    alert(row.id);
 					this.$confirm('此操作将永久删除该自由行, 是否继续?', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',

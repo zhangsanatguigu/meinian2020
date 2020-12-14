@@ -51,6 +51,20 @@ public class TravelItemController {
         return new Result(true, MessageConstant.ADD_TRAVELITEM_SUCCESS);
     }
 
+    @GetMapping("/findById")
+    public Result findById(Integer id){
+        TravelItem travelItem = travelItemService.getById(id);
+        return new Result(true,MessageConstant.QUERY_TRAVELITEM_SUCCESS,travelItem);
+    }
 
-
+    @RequestMapping("/edit")
+    public Result edit(@RequestBody TravelItem travelItem){
+        try {
+            travelItemService.edit(travelItem);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.EDIT_TRAVELITEM_FAIL);
+        }
+        return new Result(true,MessageConstant.EDIT_TRAVELITEM_SUCCESS);
+    }
 }
