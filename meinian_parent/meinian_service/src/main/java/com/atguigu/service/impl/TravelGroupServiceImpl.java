@@ -65,4 +65,9 @@ public class TravelGroupServiceImpl implements TravelGroupService {
         travelGroupDao.deleteTravelGroupAndTravelItemByTravelGroupId(travelGroup.getId());
         setTravelGroupAndTravelItem(travelGroup.getId(),travelItemIds);
     }
+
+    @Override
+    public List<TravelGroup> findAll() {
+        return travelGroupDao.findAll();
+    }
 }

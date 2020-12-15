@@ -20,4 +20,6 @@ public interface TravelGroupDao {
     void deleteTravelGroupAndTravelItemByTravelGroupId(Integer id);
 
     void edit(TravelGroup travelGroup);
+
+    List<TravelGroup> findAll();
 }

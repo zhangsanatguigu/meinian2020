@@ -252,6 +252,12 @@
             methods: {
                 //文件上传成功后的钩子，response为服务端返回的值，file为当前上传的文件封装成的js对象
                 handleAvatarSuccess(response, file) {
+                    this.imageUrl = "http://qldt9ds5t.hn-bkt.clouddn.com/"+response.data;
+                    this.$message({
+                        message: response.message,
+                        type: response.flag?'success':'error'
+                    });
+                    this.formData.imgFile = response.data;
                 },
                 //上传图片之前执行
                 beforeAvatarUpload(file) {
@@ -273,10 +279,23 @@
                 },
                 // 重置表单
                 resetForm() {
+                    this.formData = {};
+                    this.activeName = "first";
+                    this.travelItemIds = [];
+                    this.imageUrl = null;
                 },
                 // 弹出添加窗口
                 handleCreate() {
+                    this.dialogFormVisible = true;
+                    this.resetForm();
 
+                    axios.get("/travelGroup/findAll.do").then((resp)=>{
+                        if (resp.data.flag){
+                            this.tableData = resp.data.data;
+                        }else{
+                            this.$message.error(resp.data.message);
+                        }
+                    });
                 },
                 //切换页码
                 handleCurrentChange(currentPage) {

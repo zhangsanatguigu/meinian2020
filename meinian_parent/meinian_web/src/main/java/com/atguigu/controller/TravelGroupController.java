@@ -50,4 +50,10 @@ public class TravelGroupController {
         travelGroupService.edit(travelGroup,travelItemIds);
         return new Result(true,MessageConstant.EDIT_TRAVELGROUP_SUCCESS);
     }
+
+    @GetMapping("findAll")
+    public Result findAll(){
+        List<TravelGroup> list = travelGroupService.findAll();
+        return new Result(true,MessageConstant.QUERY_TRAVELGROUP_SUCCESS,list);
+    }
 }
