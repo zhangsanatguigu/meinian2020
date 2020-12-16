@@ -1,6 +1,7 @@
 package com.atguigu.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.atguigu.constant.RedisConstant;
 import com.atguigu.dao.SetmealDao;
 import com.atguigu.entity.PageResult;
 import com.atguigu.pojo.Setmeal;
@@ -11,6 +12,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import redis.clients.jedis.JedisPool;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +24,9 @@ public class SetmealServiceImpl implements SetmealService {
     @Autowired
     SetmealDao setmealDao;
 
+    @Autowired
+    JedisPool jedisPool;
+
     @Override
     public void add(Integer[] travelgroupIds, Setmeal setmeal) {
         setmealDao.add(setmeal);
@@ -29,6 +34,12 @@ public class SetmealServiceImpl implements SetmealService {
         if(travelgroupIds!=null && travelgroupIds.length > 0){
             setSetmealAndTravelGroup(setmeal.getId(),travelgroupIds);
         }
+
+        savePic2Redis(setmeal.getImg());
+    }
+
+    private void savePic2Redis(String img) {
+        jedisPool.getResource().sadd(RedisConstant.SETMEAL_PIC_DB_RESOURCES,img);
     }
 
     private void setSetmealAndTravelGroup(Integer id, Integer[] travelgroupIds) {
