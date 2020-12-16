@@ -2,6 +2,8 @@ package com.atguigu.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.atguigu.constant.MessageConstant;
+import com.atguigu.entity.PageResult;
+import com.atguigu.entity.QueryPageBean;
 import com.atguigu.entity.Result;
 import com.atguigu.pojo.Setmeal;
 import com.atguigu.service.SetmealService;
@@ -49,5 +51,13 @@ public class SetmealController {
             e.printStackTrace();
             return  new Result(false,MessageConstant.ADD_SETMEAL_FAIL);
         }
+    }
+
+    @RequestMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean){
+        PageResult pageResult = setmealService.findPage(queryPageBean.getCurrentPage(),
+                queryPageBean.getPageSize(),
+                queryPageBean.getQueryString());
+        return pageResult;
     }
 }

@@ -2,10 +2,13 @@ package com.atguigu.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.atguigu.dao.SetmealDao;
+import com.atguigu.entity.PageResult;
 import com.atguigu.pojo.Setmeal;
 import com.atguigu.service.SetmealService;
 
 import com.atguigu.service.SetmealService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,5 +38,12 @@ public class SetmealServiceImpl implements SetmealService {
             map.put("setmealId",id);
             setmealDao.setSetmealAndTravelGroup(map);
         }
+    }
+
+    @Override
+    public PageResult findPage(Integer currentPage, Integer pageSize, String queryString) {
+        PageHelper.startPage(currentPage,pageSize);
+        Page<Setmeal> page = setmealDao.findPage(queryString);
+        return new PageResult(page.getTotal(),page.getResult());
     }
 }
