@@ -257,7 +257,7 @@
                         message: response.message,
                         type: response.flag?'success':'error'
                     });
-                    this.formData.imgFile = response.data;
+                    this.formData.img = response.data;
                 },
                 //上传图片之前执行
                 beforeAvatarUpload(file) {
@@ -273,6 +273,16 @@
                 },
                 //添加
                 handleAdd () {
+                    axios.post("/setmeal/add.do?travelgroupIds="+this.travelgroupIds,this.formData).then((resp)=>{
+                        this.dialogFormVisible = false;
+                        if (resp.data.flag){
+                            this.$message.success(resp.data.message);
+                        }else{
+                            this.$message.error(resp.data.message);
+                        }
+                    }).finally(()=>{
+                        this.findPage();
+                    });
                 },
                 //分页查询
                 findPage() {
@@ -283,6 +293,7 @@
                     this.activeName = "first";
                     this.travelItemIds = [];
                     this.imageUrl = null;
+                    this.tableData = {};
                 },
                 // 弹出添加窗口
                 handleCreate() {
