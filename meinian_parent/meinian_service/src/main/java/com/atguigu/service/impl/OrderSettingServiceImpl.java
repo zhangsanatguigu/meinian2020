@@ -25,8 +25,9 @@ public class OrderSettingServiceImpl implements OrderSettingService {
             long count = orderSettingDao.findCountByOrderDate(orderSetting.getOrderDate());
             if(count>0){
                 orderSettingDao.editNumberByOrderDate(orderSetting);
+            }else{
+                orderSettingDao.add(orderSetting);
             }
-            orderSettingDao.add(orderSetting);
         }
     }
 
@@ -53,6 +54,11 @@ public class OrderSettingServiceImpl implements OrderSettingService {
 
     @Override
     public void editNumberByDate(OrderSetting orderSetting) {
-        orderSettingDao.editNumberByOrderDate(orderSetting);
+        long count = orderSettingDao.findCountByOrderDate(orderSetting.getOrderDate());
+        if(count>0){
+            orderSettingDao.editNumberByOrderDate(orderSetting);
+        }else{
+            orderSettingDao.add(orderSetting);
+        }
     }
 }
