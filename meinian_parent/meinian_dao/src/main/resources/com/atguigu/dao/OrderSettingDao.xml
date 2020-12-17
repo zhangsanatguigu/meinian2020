@@ -11,6 +11,10 @@
     </select>
     
     <update id="editNumberByOrderDate" parameterType="orderSetting">
-        update t_ordersetting set number =number+1 where orderDate = #{orderDate}
+        update t_ordersetting set number=#{number} where orderDate = #{orderDate}
     </update>
+
+    <select id="getOrderSettingByMonth" parameterType="map" resultType="orderSetting">
+        select * from t_ordersetting where orderDate between #{dateBegin} and #{dateEnd}
+    </select>
 </mapper>
