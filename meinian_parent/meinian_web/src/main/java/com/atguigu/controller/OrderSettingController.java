@@ -6,6 +6,7 @@ import com.atguigu.entity.Result;
 import com.atguigu.pojo.OrderSetting;
 import com.atguigu.service.OrderSettingService;
 import com.atguigu.utils.POIUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,8 +53,16 @@ public class OrderSettingController {
         }
     }
 
-
-
+    @RequestMapping("/editNumberByDate")
+    public Result editNumberByDate(@RequestBody  OrderSetting orderSetting){
+        try {
+            orderSettingService.editNumberByDate(orderSetting);
+            return new Result(true,MessageConstant.ORDERSETTING_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.ORDERSETTING_FAIL);
+        }
+    }
 
 
 

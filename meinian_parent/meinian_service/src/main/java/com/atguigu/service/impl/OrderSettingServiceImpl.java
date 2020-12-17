@@ -50,4 +50,9 @@ public class OrderSettingServiceImpl implements OrderSettingService {
         }
         return data;
     }
+
+    @Override
+    public void editNumberByDate(OrderSetting orderSetting) {
+        orderSettingDao.editNumberByOrderDate(orderSetting);
+    }
 }
