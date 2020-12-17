@@ -69,7 +69,7 @@ public class TestQiniu {
         }
     }
 
-    @Test
+    //@Test
     public void test2() throws IOException {
         //QiniuUtils.upload2Qiniu("D:\\temp\\90\\jjy94.jpg","jjy94.jpg");
 
