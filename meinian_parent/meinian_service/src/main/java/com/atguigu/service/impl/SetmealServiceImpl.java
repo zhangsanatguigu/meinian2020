@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import redis.clients.jedis.JedisPool;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service(interfaceClass = SetmealService.class)
@@ -57,4 +58,10 @@ public class SetmealServiceImpl implements SetmealService {
         Page<Setmeal> page = setmealDao.findPage(queryString);
         return new PageResult(page.getTotal(),page.getResult());
     }
+
+    @Override
+    public List<Setmeal> findAll() {
+        return setmealDao.findAll();
+    }
 }
+
