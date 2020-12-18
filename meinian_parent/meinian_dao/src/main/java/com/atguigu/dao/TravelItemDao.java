@@ -18,4 +18,6 @@ public interface TravelItemDao {
     void edit(TravelItem travelItem);
 
     List<TravelItem> findAll();
+
+    List<TravelItem> findTravelItemListById(Integer id);
 }

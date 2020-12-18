@@ -15,7 +15,7 @@
     <script src="../plugins/healthmobile.js"></script>
     <script>
         var id = getUrlParam("id");
-      //  alert(id)
+        //alert(id)
     </script>
 </head>
 <body data-spy="scroll" data-target="#myNavbar" data-offset="150">
@@ -38,6 +38,7 @@
                 <p class="keywords">
                     <span>{{setmeal.sex == '0' ? '性别不限' : setmeal.sex == '1' ? '男':'女'}}</span>
                     <span>{{setmeal.age}}</span>
+                    <span>{{setmeal.price}}</span>
                 </p>
             </div>
             <!--<div class="project-know">
@@ -65,7 +66,7 @@
                             <div class="item flex2">{{travelGroup.name}}</div>
                             <div class="item flex3">
                                 <label v-for="travelItem in travelGroup.travelItems">
-                                    {{travelItem.name}}
+                                    {{travelItem.name}}<br/>
                                 </label>
                             </div>
                             <div class="item flex3">{{travelGroup.remark}}</div>
@@ -95,7 +96,7 @@
             axios.post("/setmeal/findById.do?id=" + id).then((response) => {
                 if(response.data.flag){
                     this.setmeal = response.data.data;
-                    this.imgUrl = 'http://q4x3lzs4r.bkt.clouddn.com/' + this.setmeal.img;
+                    this.imgUrl = 'http://qldt9ds5t.hn-bkt.clouddn.com/' + this.setmeal.img;
                 }
             });
         }

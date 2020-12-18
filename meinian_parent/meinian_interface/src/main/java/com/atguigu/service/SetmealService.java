@@ -11,4 +11,6 @@ public interface SetmealService {
     PageResult findPage(Integer currentPage, Integer pageSize, String queryString);
 
     List<Setmeal> findAll();
+
+    Setmeal getSetmealById(Integer id);
 }

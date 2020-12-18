@@ -63,5 +63,20 @@
     <select id="findAll" resultType="travelGroup">
         select * from t_travelgroup
     </select>
+
+    <resultMap id="resultMap" type="travelGroup">
+        <id column="id" property="id"></id>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="helpCode" property="helpCode"/>
+        <result column="sex" property="sex"/>
+        <result column="remark" property="remark"/>
+        <result column="attention" property="attention"/>
+        <collection property="travelItems" select="com.atguigu.dao.TravelItemDao.findTravelItemListById" column="id"></collection>
+    </resultMap>
+    
+    <select id="findTravelGroupListById" parameterType="int" resultMap="resultMap">
+        select * from t_travelgroup where id in (select travelgroup_id from t_setmeal_travelgroup where setmeal_id=#{id})
+    </select>
 </mapper>
 

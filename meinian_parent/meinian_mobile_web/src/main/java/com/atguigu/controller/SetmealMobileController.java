@@ -21,10 +21,21 @@ public class SetmealMobileController {
     public Result getSetmeal(){
         try {
             List<Setmeal> list = setmealService.findAll();
-            return new Result(true, MessageConstant.QUERY_SETMEAL_SUCCESS,list);
+            return new Result(true, MessageConstant.QUERY_SETMEALLIST_SUCCESS,list);
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result(false,MessageConstant.QUERY_SETMEAL_FAIL);
+            return new Result(false,MessageConstant.QUERY_SETMEALLIST_FAIL);
+        }
+    }
+
+    @RequestMapping("/findById")
+    public Result getSetmealById(Integer id){
+        try {
+            Setmeal setmeal = setmealService.getSetmealById(id);
+            return new Result(true,MessageConstant.QUERY_SETMEAL_SUCCESS,setmeal);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(true,MessageConstant.QUERY_SETMEAL_FAIL);
         }
     }
 }
