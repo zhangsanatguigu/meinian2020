@@ -33,4 +33,22 @@ public class ValidateCodeController {
 
         return new Result(true,MessageConstant.SEND_VALIDATECODE_SUCCESS);
     }
+
+    @RequestMapping("/send4Login")
+    public Result send4Login(String telephone){
+        Integer code = null;
+        try {
+            code = ValidateCodeUtils.generateValidateCode(6);
+            SMSUtils.sendShortMessage(telephone,code.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.SEND_VALIDATECODE_FAIL);
+        }
+        System.out.println("发送的手机【+telephone+】验证码:"+ code.toString());
+
+        jedisPool.getResource().setex(telephone+ RedisMessageConstant.SENDTYPE_LOGIN,5*60, code.toString());
+
+        return new Result(true,MessageConstant.SEND_VALIDATECODE_SUCCESS);
+    }
+
 }
