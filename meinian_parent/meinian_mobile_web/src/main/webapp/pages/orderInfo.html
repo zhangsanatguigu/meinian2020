@@ -119,7 +119,7 @@
                             return false;
                         }
                         validateCodeButton = $("#validateCodeButton")[0];
-                        window.setInterval(doLoop,1000);
+                        clock = window.setInterval(doLoop,1000);
 
                         axios.post("/validateCode/send4Order.do?telephone="+telephone).then((resp)=>{
                             if (!resp.data.flag){
@@ -129,6 +129,21 @@
                     },
                     //提交预约
                     submitOrder(){
+                        //检查身份证号格式
+                        if (!checkIdCard(this.orderInfo.idCard)){
+                            this.$message.error("身份证号码输入错误,请重新输入");
+                            return false;
+                        }
+                        axios.post("/order/submit.do",this.orderInfo).then((resp)=>{
+                            if (resp.data.flag){
+                                //预约成功，跳转到预约成功页面
+                                window.location.href = "orderSuccess.html?orderId="+resp.data.data.id;
+                            }else{
+                                //预约失败，提示预约失败消息
+                                this.$message.error(resp.data.message);
+                            }
+                        });
+
                     }
                 },
                 mounted(){
