@@ -87,4 +87,14 @@ public class OrderServiceImpl implements OrderService {
 
         return new Result(true,MessageConstant.ORDER_SUCCESS,order);
     }
+
+    @Override
+    public Map findById4Detail(Integer id) throws Exception {
+        Map map = orderDao.findById4Detail(id);
+        if(map!=null){
+            Date date = (Date)map.get("orderDate");
+            map.put("orderDate",DateUtils.parseDate2String(date));
+        }
+        return map;
+    }
 }

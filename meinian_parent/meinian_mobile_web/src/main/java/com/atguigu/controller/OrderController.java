@@ -67,4 +67,40 @@ public class OrderController {
         //5.返回结果
         return result;
     }
+
+    @RequestMapping("/findById")
+    public Result findById(Integer id){
+        try {
+            Map map = orderService.findById4Detail(id);
+            return new Result(true,MessageConstant.QUERY_ORDER_SUCCESS,map);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.QUERY_ORDER_FAIL);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
