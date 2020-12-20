@@ -6,7 +6,11 @@
 
     <groupId>com.atguigu</groupId>
     <artifactId>meinian2020</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>spring_security_demo</module>
+    </modules>
 
 
 </project>

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class TestSMS {
 
-    @Test
+    //@Test
     public void testSMS() throws Exception {
         Integer code = ValidateCodeUtils.generateValidateCode(6);
         SMSUtils.sendShortMessage("18600025821",String.valueOf(code));
