@@ -5,7 +5,7 @@
          id="WebApp_ID" version="3.0">
 
     <!-- 解决post乱码
- Spring里的字符过滤器CharacterEncodingFilter是针对请求的，forceEncoding=true是意思是指无论客户端请求是否包含了编码，都用过滤器里的编码来解析请求 .-->
+         Spring里的字符过滤器CharacterEncodingFilter是针对请求的，forceEncoding=true是意思是指无论客户端请求是否包含了编码，都用过滤器里的编码来解析请求 .-->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -22,6 +22,25 @@
         <filter-name>CharacterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+
+    <filter>
+        <!--
+          DelegatingFilterProxy用于整合第三方框架（代理过滤器，非真正的过滤器，真正的过滤器需要在spring的配置文件）
+          整合Spring Security时过滤器的名称必须为springSecurityFilterChain，
+          否则会抛出NoSuchBeanDefinitionException异常
+        -->
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+
     <servlet>
         <servlet-name>springmvc</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
