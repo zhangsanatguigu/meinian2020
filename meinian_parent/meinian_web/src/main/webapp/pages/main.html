@@ -37,7 +37,7 @@
                         <el-dropdown class="avatar-container right-menu-item" trigger="click">
                             <div class="avatar-wrapper">
                                 <img src="../img/user2-160x160.jpg" class="user-avatar">
-                                尚硅谷
+                                {{username}}
                             </div>
                             <el-dropdown-menu slot="dropdown">
                                 <el-dropdown-item divided>
@@ -195,7 +195,14 @@
 		 //发送请求获取当前登录用户的用户名
 		created:function () {
             //发送请求获取当前登录用户的用户名
-            
+            // 返回Result(flag,message,data)，data放置User对象
+            axios.get("/user/getUsername.do").then((response)=>{
+                if(response.data.flag){
+                    this.username = response.data.data.username;
+                }
+            }).catch((error)=>{
+                this.$message.error("获取用户名失败");
+            })
         }
     });
     $(function() {

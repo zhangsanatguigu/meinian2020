@@ -8,6 +8,7 @@ import com.atguigu.entity.Result;
 import com.atguigu.pojo.TravelGroup;
 import com.atguigu.pojo.TravelItem;
 import com.atguigu.service.TravelItemService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class TravelItemController {
     TravelItemService travelItemService;
 
     @RequestMapping("/delete")
+    @PreAuthorize("hasAuthority('TRAVELITEM_DELETE')")//权限校验，使用TRAVELITEM_DELETE123测试
     public Result delete(Integer id){
         try {
             travelItemService.deleteById(id);
@@ -34,6 +36,7 @@ public class TravelItemController {
     }
 
     @PostMapping("/findPage")
+    @PreAuthorize("hasAuthority('TRAVELITEM_QUERY')")//权限校验
     public PageResult get(@RequestBody QueryPageBean queryPageBean){
         PageResult pageResult = travelItemService.findPage(
                 queryPageBean.getCurrentPage(),
@@ -43,6 +46,7 @@ public class TravelItemController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('TRAVELITEM_ADD111')")//权限校验
     public Result add(@RequestBody TravelItem travelItem){
         System.out.println(travelItem);
         try {
@@ -61,6 +65,7 @@ public class TravelItemController {
     }
 
     @RequestMapping("/edit")
+    @PreAuthorize("hasAuthority('TRAVELITEM_EDIT')")//权限校验
     public Result edit(@RequestBody TravelItem travelItem){
         try {
             travelItemService.edit(travelItem);

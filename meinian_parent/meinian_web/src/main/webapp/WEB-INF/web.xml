@@ -55,4 +55,10 @@
         <servlet-name>springmvc</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
+    <!--
+    <error-page>
+        <error-code>403</error-code>
+        <location>/pages/error/403.html</location>
+    </error-page>-->
 </web-app>

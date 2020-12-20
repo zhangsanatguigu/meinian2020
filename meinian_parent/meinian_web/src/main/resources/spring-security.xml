@@ -80,7 +80,8 @@
             <security:frame-options policy="SAMEORIGIN"></security:frame-options>
         </security:headers>
 
-
+        <!--自定义异常处理-->
+        <security:access-denied-handler ref="customAccessDeniedHandler"/>
     </security:http>
 
 
