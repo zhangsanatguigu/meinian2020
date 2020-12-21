@@ -46,7 +46,7 @@ public class TravelItemController {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasAuthority('TRAVELITEM_ADD111')")//权限校验
+    @PreAuthorize("hasAuthority('TRAVELITEM_ADD')")//权限校验
     public Result add(@RequestBody TravelItem travelItem){
         System.out.println(travelItem);
         try {
