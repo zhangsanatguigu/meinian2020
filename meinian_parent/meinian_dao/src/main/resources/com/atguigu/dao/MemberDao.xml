@@ -14,4 +14,18 @@
     <select id="findMemberCountByBeforeDate" parameterType="string" resultType="int">
         select count(*) from t_member where regTime &lt;= #{month}
     </select>
+
+    <!--******************运营统计**********************************************-->
+    <select id="getTodayNewMember" parameterType="string" resultType="int">
+        select count(*) from t_member where regTime = #{today}
+    </select>
+
+    <select id="getTotalMember" resultType="int">
+        select count(*) from t_member
+    </select>
+
+    <select id="getThisWeekAndMonthNewMember" parameterType="string" resultType="int">
+        select count(*) from t_member where regTime &gt;= #{date}
+    </select>
+    <!--******************运营统计**********************************************-->
 </mapper>

@@ -8,4 +8,10 @@ public interface MemberDao {
     void add(Member member);
 
     Integer findMemberCountByBeforeDate(String regTime);
+
+    Integer getTodayNewMember(String today);
+
+    Integer getTotalMember();
+
+    Integer getThisWeekAndMonthNewMember(String date);
 }

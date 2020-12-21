@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.atguigu.constant.MessageConstant;
 import com.atguigu.entity.Result;
 import com.atguigu.service.MemberService;
+import com.atguigu.service.ReportService;
 import com.atguigu.service.SetmealService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,9 @@ public class ReportController {
 
     @Reference
     SetmealService setmealService;
+
+    @Reference
+    ReportService reportService;
 
     @RequestMapping("/getMemberReport")
     public Result getMemberReport(){
@@ -63,4 +67,15 @@ public class ReportController {
         return new Result(true,MessageConstant.GET_SETMEAL_COUNT_REPORT_SUCCESS,map) ;
     }
 
+    /** 运营统计数据*/
+    @RequestMapping("/getBusinessReportData")
+    public Result getBusinessReportData(){
+        try {
+            Map<String,Object> data = reportService.getBusinessReportData();
+            return new Result(true,MessageConstant.GET_BUSINESS_REPORT_SUCCESS,data) ;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,MessageConstant.GET_BUSINESS_REPORT_FAIL);
+        }
+    }
 }

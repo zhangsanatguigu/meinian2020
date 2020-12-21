@@ -11,4 +11,14 @@ public interface OrderDao {
     void add(Order order);
 
     Map findById4Detail(Integer id);
+
+    Integer getTodayOrderNumber(String today);
+
+    Integer getTodayVisitsNumber(String today);
+
+    Integer getThisWeekAndMonthOrderNumber(Map paramWeekOrder);
+
+    Integer getThisWeekAndMonthVisitsNumber(Map paramWeekVisits);
+
+    List<Map<String, Object>> findHotSetmeal();
 }
