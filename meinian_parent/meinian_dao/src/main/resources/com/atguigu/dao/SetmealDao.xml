@@ -47,5 +47,12 @@
         select * from t_setmeal where id = #{id}
     </select>
 
+    <select id="findSetmealCount" resultType="map">
+        select s.name as name,count(s.id) as value from
+        t_setmeal s,t_order o
+        where s.id=o.setmeal_id
+        group by s.name
+    </select>
+
 </mapper>
 
