@@ -17,7 +17,8 @@
     <script src="../js/vue.js"></script>
     <script src="../plugins/elementui/index.js"></script>
     <script src="../js/axios-0.18.0.js"></script>
-    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=1B7db771KoafrLuRGbqQQiKOtu64AWC2"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=1yGIc901IHvG65b3jGUu5nrkWUOYpT3c"></script>
+
     <style>
         .datatable {
             position: relative;
@@ -95,7 +96,7 @@
                         <el-table-column prop="lat" label="所在纬度" align="center"></el-table-column>
                         <el-table-column label="操作" align="center">
                             <template slot-scope="scope">
-<!--                                <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>-->
+                                <!-- <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>-->
                                 <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
                             </template>
                         </el-table-column>
@@ -118,9 +119,9 @@
                                 <el-input id="suggestId" name="address_detail" placeholder="请输入要查询的地址" v-model="address_detail"  style="width: 400px;"></el-input>
                                 <el-button type="primary" @click="handleAdd()" class="butT">确定添加</el-button>
                             </div>
-                            <!--                            地址：<input type="text" id="suggestId" name="address_detail" placeholder="请输入要查询的地址" v-model="address_detail" class="input_style">-->
+                            <!-- 地址：<input type="text" id="suggestId" name="address_detail" placeholder="请输入要查询的地址" v-model="address_detail" class="input_style">-->
                             <div id="allmap"></div>
-<!--                            <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>-->
+                            <!-- <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>-->
                         </el-dialog>
                     </div>
                 </el-tab-pane>
@@ -217,7 +218,6 @@
             },
             //分页查询
             findPage() {
-
                 var param={
                     currentPage: this.pagination.currentPage,
                     pageSize: this.pagination.pageSize,
@@ -276,7 +276,7 @@
                     addressName:this.address_detail,
                     lng:this.userlocation.lng,
                     lat:this.userlocation.lat
-                }
+                };
                 axios.post("/address/addAddress.do",param).then((res)=>{
                     this.$message({
                         type:'success',

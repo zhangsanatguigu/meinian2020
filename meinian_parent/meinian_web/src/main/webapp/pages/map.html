@@ -9,15 +9,15 @@
 		#l-map{height:80%;width:100%;}
 		#r-result{width:100%; font-size:14px;line-height:20px;}
 	</style>
-	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=1B7db771KoafrLuRGbqQQiKOtu64AWC2"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=1yGIc901IHvG65b3jGUu5nrkWUOYpT3c"></script>
 	<script src="../js/jquery.min.js"></script>
 </head>
 <body onload="init()">
 <div id="l-map"></div>
-<!--<div id="r-result">
-	<input type="button" value="批量反地址解析+商圈" onclick="bdGEO(0)" />
-	<div id="result"></div>
-</div>-->
+<!--<div id="r-result">-->
+<!--	<input type="button" value="批量反地址解析+商圈" onclick="bdGEO(0)" />-->
+<!--	<div id="result"></div>-->
+<!--</div>-->
 </body>
 </html>
 <script type="text/javascript">
@@ -36,8 +36,7 @@
 				// map.addOverlay(mk);
 				map.panTo(r.point);
 				// alert('您的位置：'+r.point.lng+','+r.point.lat);
-			}
-			else {
+			}else {
 				// alert('failed'+this.getStatus());
 			}
 		});*/
@@ -72,20 +71,20 @@
 			map.addOverlay(marker);
 			marker.setLabel(new BMap.Label(addNames[i],{offset:new BMap.Size(20,-10)}));
 		}
-		function bdGEO(){
-			var pt = adds[index];
-			geocodeSearch(pt);
-			index++;
-		}
-		function geocodeSearch(pt){
-			if(index < adds.length-1){
-				setTimeout(window.bdGEO,400);
-			}
-			myGeo.getLocation(pt, function(rs){
-				var addComp = rs.addressComponents;
-				document.getElementById("result").innerHTML += index + ". " +adds[index-1].lng + "," + adds[index-1].lat + "："  + "商圈(" + rs.business + ")  结构化数据(" + addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber + ")<br/><br/>";
-			});
-		}
+		// function bdGEO(){
+		// 	var pt = adds[index];
+		// 	geocodeSearch(pt);
+		// 	index++;
+		// }
+		// function geocodeSearch(pt){
+		// 	if(index < adds.length-1){
+		// 		setTimeout(window.bdGEO,400);
+		// 	}
+		// 	myGeo.getLocation(pt, function(rs){
+		// 		var addComp = rs.addressComponents;
+		// 		document.getElementById("result").innerHTML += index + ". " +adds[index-1].lng + "," + adds[index-1].lat + "："  + "商圈(" + rs.business + ")  结构化数据(" + addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber + ")<br/><br/>";
+		// 	});
+		// }
 	}
 	
 </script>
